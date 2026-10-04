@@ -1,0 +1,712 @@
+[
+    {
+        "id": "tab_smartsense",
+        "type": "tab",
+        "label": "SmartSense Dashboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "mqtt_temp",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Temperature",
+        "topic": "smartsense/3707ict-team01/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "chg_temp"
+            ]
+        ]
+    },
+    {
+        "id": "chg_temp",
+        "type": "change",
+        "z": "tab_smartsense",
+        "name": "Temperature -> number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(payload)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "ui_temp_text",
+                "ui_temp_gauge",
+                "5b4394d5a0d1234c"
+            ]
+        ]
+    },
+    {
+        "id": "ui_temp_text",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_environment",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "Temperature (°C)",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 600,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ui_temp_gauge",
+        "type": "ui-gauge",
+        "z": "tab_smartsense",
+        "name": "",
+        "group": "ui_group_environment",
+        "order": 2,
+        "width": "4",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5CD65C"
+            },
+            {
+                "from": "28",
+                "color": "#F9D423"
+            },
+            {
+                "from": "35",
+                "color": "#E74C3C"
+            }
+        ],
+        "min": 0,
+        "max": 50,
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "className": "",
+        "x": 600,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_hum",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Humidity",
+        "topic": "smartsense/3707ict-team01/humidity",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "chg_hum"
+            ]
+        ]
+    },
+    {
+        "id": "chg_hum",
+        "type": "change",
+        "z": "tab_smartsense",
+        "name": "Humidity -> number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(payload)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Humidity",
+                "tot": "str"
+            }
+        ],
+        "x": 320,
+        "y": 140,
+        "wires": [
+            [
+                "ui_hum_text",
+                "ui_hum_gauge",
+                "5b4394d5a0d1234c"
+            ]
+        ]
+    },
+    {
+        "id": "ui_hum_text",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_environment",
+        "order": 3,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "Humidity (%)",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 600,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ui_hum_gauge",
+        "type": "ui-gauge",
+        "z": "tab_smartsense",
+        "name": "",
+        "group": "ui_group_environment",
+        "order": 4,
+        "width": "4",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Humidity",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5DADE2"
+            },
+            {
+                "from": "70",
+                "color": "#F5B041"
+            }
+        ],
+        "min": 0,
+        "max": 100,
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "className": "",
+        "x": 600,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_light",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "LDR Reading",
+        "topic": "smartsense/3707ict-team01/light",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "chg_light"
+            ]
+        ]
+    },
+    {
+        "id": "chg_light",
+        "type": "change",
+        "z": "tab_smartsense",
+        "name": "LDR -> number",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "ui_light_text"
+            ]
+        ]
+    },
+    {
+        "id": "ui_light_text",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_environment",
+        "order": 5,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "LDR Reading",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 590,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ui_env_chart",
+        "type": "ui-chart",
+        "z": "tab_smartsense",
+        "group": "ui_group_environment",
+        "name": "Environment Chart",
+        "label": "Live Temperature and Humidity",
+        "order": 6,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "Time",
+        "xAxisProperty": "timestamp",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "Value",
+        "yAxisProperty": "value",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "100",
+        "bins": "",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 2,
+        "showLegend": true,
+        "removeOlder": 5,
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0094ce",
+            "#f39c12",
+            "#2ecc71",
+            "#e74c3c",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "12",
+        "height": "5",
+        "className": "",
+        "interpolation": "linear",
+        "x": 850,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_occ",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Occupancy",
+        "topic": "smartsense/3707ict-team01/occupancy",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "ui_occ"
+            ]
+        ]
+    },
+    {
+        "id": "ui_occ",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_status",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Occupancy",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "mqtt_led",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Light State",
+        "topic": "smartsense/3707ict-team01/light_state",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 365,
+        "wires": [
+            [
+                "ui_led"
+            ]
+        ]
+    },
+    {
+        "id": "ui_led",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_status",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Light State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 365,
+        "wires": []
+    },
+    {
+        "id": "mqtt_vent",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Vent State",
+        "topic": "smartsense/3707ict-team01/vent_state",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 410,
+        "wires": [
+            [
+                "ui_vent"
+            ]
+        ]
+    },
+    {
+        "id": "ui_vent",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_status",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Vent State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 410,
+        "wires": []
+    },
+    {
+        "id": "mqtt_alarm",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Alarm",
+        "topic": "smartsense/3707ict-team01/alarm_state",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 455,
+        "wires": [
+            [
+                "ui_alarm"
+            ]
+        ]
+    },
+    {
+        "id": "ui_alarm",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_status",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Alarm",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 455,
+        "wires": []
+    },
+    {
+        "id": "mqtt_office",
+        "type": "mqtt in",
+        "z": "tab_smartsense",
+        "name": "Office State",
+        "topic": "smartsense/3707ict-team01/office_state",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "broker_hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "ui_office"
+            ]
+        ]
+    },
+    {
+        "id": "ui_office",
+        "type": "ui-text",
+        "z": "tab_smartsense",
+        "group": "ui_group_status",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Office State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5b4394d5a0d1234c",
+        "type": "function",
+        "z": "tab_smartsense",
+        "name": "Prepare Chart Data",
+        "func": "msg.timestamp = Date.now();\nmsg.value = Number(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "ui_env_chart"
+            ]
+        ]
+    },
+    {
+        "id": "broker_hivemq",
+        "type": "mqtt-broker",
+        "name": "Public HiveMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {}
+    },
+    {
+        "id": "ui_group_environment",
+        "type": "ui-group",
+        "name": "Environment",
+        "page": "ui_page_smartsense",
+        "width": "12",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ui_group_status",
+        "type": "ui-group",
+        "name": "Office Status",
+        "page": "ui_page_smartsense",
+        "width": "12",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ui_page_smartsense",
+        "type": "ui-page",
+        "name": "SmartSense",
+        "ui": "ui_base_smartsense",
+        "path": "/week6-iot",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "ui_theme_smartsense",
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ui_base_smartsense",
+        "type": "ui-base",
+        "name": "SmartSense UI",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "ui_theme_smartsense",
+        "type": "ui-theme",
+        "name": "SmartSense Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "17bef4ead7ecc742",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.32.0"
+        }
+    }
+]
